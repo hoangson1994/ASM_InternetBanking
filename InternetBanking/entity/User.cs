@@ -19,7 +19,7 @@ namespace InternetBanking
         private long birthday;
         private string phone;
         private int gender;
-        private int userId;
+        private string userId;
         private string email;
         private int status;
         private long createAt;
@@ -29,7 +29,7 @@ namespace InternetBanking
         {
 
         }
-        public User(string username, string bankId, double balance, string fullname, long birthday, string phone, int gender, int userId, string email, int status, long createAt, long updateAt)
+        public User(string username, string bankId, double balance, string fullname, long birthday, string phone, int gender, string userId, string email, int status, long createAt, long updateAt)
         {
             this.Username = username;
             this.BankId = bankId;
@@ -45,7 +45,7 @@ namespace InternetBanking
             this.UpdateAt = updateAt;
         }
 
-        public User(string username, string bankId, double balance, string fullname, long birthday, string phone, int gender, int userId, string email, int status)
+        public User(string username, string bankId, double balance, string fullname, long birthday, string phone, int gender, string userId, string email, int status)
         {
             this.Username = username;
             this.BankId = bankId;
@@ -69,7 +69,7 @@ namespace InternetBanking
         public long Birthday { get => birthday; set => birthday = value; }
         public string Phone { get => phone; set => phone = value; }
         public int Gender { get => gender; set => gender = value; }
-        public int UserId { get => userId; set => userId = value; }
+        public string UserId { get => userId; set => userId = value; }
         public string Email { get => email; set => email = value; }
         public int Status { get => status; set => status = value; }
         public long CreateAt { get => createAt; set => createAt = value; }
