@@ -54,8 +54,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\Controller.cs" />
+    <Compile Include="entity\Account.cs" />
+    <Compile Include="entity\History.cs" />
+    <Compile Include="entity\User.cs" />
+    <Compile Include="main\MainThread.cs" />
+    <Compile Include="MD5Encrypt\MD5.cs" />
+    <Compile Include="model\DbConnection.cs" />
+    <Compile Include="model\Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="validate\ErrorEntity.cs" />
+    <Compile Include="validate\MapError.cs" />
+    <Compile Include="validate\Validate.cs" />
+    <Compile Include="view\GenerateForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -74,8 +86,6 @@
     <Content Include="docs\MySqlParameterCollection.xml" />
     <Content Include="docs\MySqlTransaction.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="entity\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
