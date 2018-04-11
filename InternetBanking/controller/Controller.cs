@@ -44,6 +44,7 @@ namespace InternetBanking
             String s = String.Format("{0,15} {1,15} {2,15} {3,15} {4,50}\n\n\n\n\n", "Mã Giao Dịch", "STK Gửi", "STK Nhận", "Số Tiền", "Nội dung");
             for (int i = 0; i < 5; i++)
                 s += String.Format("{0,15} {1,15} {2,15} {3,15} {4,50:N0}\n", listHistory[i].TradingCode, listHistory[i].SendBankId, listHistory[i].ReceiveBankId, listHistory[i].Amount, listHistory[i].Content);
+            Console.WriteLine(s);
         }
 
         // viết các câu lệnh xử lí phần rút tiền
