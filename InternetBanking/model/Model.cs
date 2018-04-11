@@ -35,6 +35,7 @@ namespace InternetBanking
     
 
         }
+                                                                                                 
 
         // thêm vào bảng history khi chuyển khoản thành công
         public void InsertToTableHistory()
