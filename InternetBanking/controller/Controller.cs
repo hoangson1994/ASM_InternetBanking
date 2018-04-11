@@ -9,7 +9,9 @@ namespace InternetBanking
     class Controller
     {
         Model model = new Model();
+
         User user;
+
         public bool HandleLogin(string username, string password)
         {
             // gọi hàm SelectByUsername(username).
@@ -38,15 +40,13 @@ namespace InternetBanking
             // nếu hàm trả về 1 user: 
             //  - so sánh password nhập vào và pass lưu trong database: == thì return true còn != return false (có muối);
             // nếu hàm trả về null thì return false(đăng nhập không thành công); 
-
-
         }
     
 
         // viết các câu lệnh xử lí phần đăng kí
         public void HandleSignup()
         {
-
+            
         }
 
         // viết các câu lệnh xử lí phần thông tin người dùng
