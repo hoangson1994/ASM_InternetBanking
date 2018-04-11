@@ -1,0 +1,10 @@
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csprojResolveAssemblyReference.cache
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe.config
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.pdb
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.dll
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.xml
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb
