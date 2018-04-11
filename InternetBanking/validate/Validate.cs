@@ -85,13 +85,13 @@ namespace InternetBanking
         public string ValidateBirthday(string txt)
         {
             Regex regex = new Regex("[0-9/][0-9/][0-9]");
-            DateTime birthdayDateTime = DateTime.Parse(txt);
             if (txt == null)
             {
               return MapEntity.mapError["birthday"].ErrorEmpty;
             }
             else if (regex.IsMatch(txt))
             {
+                DateTime birthdayDateTime = DateTime.Parse(txt);
                 if ((DateTime.Now.Year - birthdayDateTime.Year) < 18)
                 {
                     return MapEntity.mapError["birthday"].ErrorLength;

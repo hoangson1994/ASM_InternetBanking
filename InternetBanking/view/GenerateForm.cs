@@ -90,7 +90,7 @@ namespace InternetBanking
                 string validatedUsername = validate.ValidateUsername(username);
                 if (validatedUsername == null)
                 {
-                    if (controller.CheckUsernameExist(username) == true)
+                    if (controller.CheckUsernameExist(username) == false)
                     {
                         account.Username = username;
                         user.Username = username;
@@ -141,7 +141,7 @@ namespace InternetBanking
 
             while (true)
             {
-                Console.WriteLine("Please Enter BirthDay(yyyy/mm/dd): ");
+                Console.WriteLine("Please Enter BirthDay(dd/mm/yyyy): ");
                 string DoB = Console.ReadLine();
                 string validatedBirthday = validate.ValidateBirthday(DoB);
                 if (validatedBirthday == null)

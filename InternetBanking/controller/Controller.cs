@@ -49,9 +49,9 @@ namespace InternetBanking
             if (account != null)
             {
                 Console.WriteLine("Username has Exist. Please Re-Enter username.");
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         // viết các câu lệnh xử lí phần đăng kí
