@@ -41,9 +41,9 @@ namespace InternetBanking
             Console.WriteLine("5 lần giao dịch gần nhất:");
             Model model = new Model();
             List<History> listHistory = model.SelectByUsernameFromTableHistory(user.BankId);
-            String s = String.Format("{0,15} {1,15} {2,15} {3,15} {4,50}\n\n\n\n\n", "Mã Giao Dịch", "STK Gửi", "STK Nhận", "Số Tiền", "Nội dung");
+            String s = String.Format("{0,15} {1,15} {2,15} {3,15} {4,30}\n", "Mã Giao Dịch", "STK Gửi", "STK Nhận", "Số Tiền", "Nội dung");
             for (int i = 0; i < 5; i++)
-                s += String.Format("{0,15} {1,15} {2,15} {3,15} {4,50:N0}\n", listHistory[i].TradingCode, listHistory[i].SendBankId, listHistory[i].ReceiveBankId, listHistory[i].Amount, listHistory[i].Content);
+                s += String.Format("{0,15} {1,15} {2,15} {3,15} {4,30:N0}\n", listHistory[i].TradingCode, listHistory[i].SendBankId, listHistory[i].ReceiveBankId, listHistory[i].Amount, listHistory[i].Content);
             Console.WriteLine(s);
         }
 
