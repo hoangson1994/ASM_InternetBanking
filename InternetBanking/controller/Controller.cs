@@ -9,6 +9,7 @@ namespace InternetBanking
     class Controller
     {
         Model model = new Model();
+        User user;
         public bool HandleLogin(string username, string password)
         {
             // gọi hàm SelectByUsername(username).
@@ -20,7 +21,9 @@ namespace InternetBanking
                 string passwordLogin = MD5.CreateMD5(password + account.Salt);
                 if (passwordDB.Equals(passwordLogin))
                 {
+                    user = model.SelectByUsernameFromTableUser(username);
                     return true;
+                    
                 }
                 else
                 {

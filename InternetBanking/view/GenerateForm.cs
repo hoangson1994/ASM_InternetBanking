@@ -17,6 +17,7 @@ namespace InternetBanking
                 Console.WriteLine("========Wellcom to InternetBanking========");
                 Console.WriteLine("1. Login.");
                 Console.WriteLine("2. Signup.");
+                Console.WriteLine("3. Exit.");
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
@@ -27,8 +28,11 @@ namespace InternetBanking
                     case 2:
                         Signup();
                         break;
+                    case 3:
+                        Environment.Exit(0);
+                        break;
                     default:
-                        Console.WriteLine("Please enter 1 or 2 !!!");
+                        Console.WriteLine("Please enter from 1 to 3 !!!");
                         break;
                 }
             }
