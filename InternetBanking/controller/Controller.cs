@@ -42,11 +42,32 @@ namespace InternetBanking
             // nếu hàm trả về null thì return false(đăng nhập không thành công); 
         }
     
+        // viết các câu lệnh xử lí kiểm trả username tồn tại.
+        public bool CheckUsernameExist(string username)
+        {
+            Account account = model.SelectByUsernameFromTableAccount(username);
+            if (account != null)
+            {
+                Console.WriteLine("Username has Exist. Please Re-Enter username.");
+                return false;
+            }
+            return true;
+        }
 
         // viết các câu lệnh xử lí phần đăng kí
-        public void HandleSignup()
+        public bool HandleSignup(Account account, User user)
         {
-            
+            if (model.InsertToTableAccount(account) == true && model.InsertToTableUsers(user) == true)
+            {
+                Console.WriteLine("Sign Up Success");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Sign Up Failed.");
+                return false;
+            }
+
         }
 
         // viết các câu lệnh xử lí phần thông tin người dùng
