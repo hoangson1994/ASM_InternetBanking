@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InternetBanking.generatebankid;
+using InternetBanking.MD5Encrypt;
 
 namespace InternetBanking
 {
@@ -12,6 +14,7 @@ namespace InternetBanking
         Model model = new Model();
         Validate validate = new Validate();
         Controller controller = new Controller();
+        LongTime longTime = new LongTime();
 
         // Tạo form Internet Banking.
         public void InternetBanking()
@@ -78,17 +81,25 @@ namespace InternetBanking
         public void Signup()
         {
             Console.WriteLine("========= Sign Up Form ========");
+            Account account = new Account();
+            User user = new User();
             while (true)
             {
                 Console.WriteLine("Please Enter Username: ");
                 string username = Console.ReadLine();
-                if (validate.ValidateUsername(username) == null)
+                string validatedUsername = validate.ValidateUsername(username);
+                if (validatedUsername == null)
                 {
-                    break;
+                    if (controller.CheckUsernameExist(username) == false)
+                    {
+                        account.Username = username;
+                        user.Username = username;
+                        break;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidateUsername(username));
+                    Console.WriteLine(validatedUsername);
                 }
             }
 
@@ -96,13 +107,19 @@ namespace InternetBanking
             {
                 Console.WriteLine("Please Enter Password: ");
                 string password = Console.ReadLine();
-                if (validate.ValidatePassword(password) == null)
+                string validatedPassword = validate.ValidatePassword(password);
+                if (validatedPassword == null)
                 {
+                    string salt = SaltGenerator.SaltGen(5);
+                    account.Salt = salt;
+                    string passwordwithsalt = password + salt;
+                    string passEncrypt = MD5.CreateMD5(passwordwithsalt);
+                    account.Password = passEncrypt;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidatePassword(password));
+                    Console.WriteLine(validatedPassword);
                 }
             }
 
@@ -110,27 +127,31 @@ namespace InternetBanking
             {
                 Console.WriteLine("Please Enter Fullname: ");
                 string fullName = Console.ReadLine();
-                if (validate.ValidateFullname(fullName) == null)
+                string validatedFullName = validate.ValidateFullname(fullName);
+                if (validatedFullName == null)
                 {
+                    user.Fullname = fullName;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidateFullname(fullName));
+                    Console.WriteLine(validatedFullName);
                 }
             }
 
             while (true)
             {
-                Console.WriteLine("Please Enter BirthDay(01-01-1990): ");
+                Console.WriteLine("Please Enter BirthDay(dd/mm/yyyy): ");
                 string DoB = Console.ReadLine();
-                if (validate.ValidateBirthday(DoB) == null)
+                string validatedBirthday = validate.ValidateBirthday(DoB);
+                if (validatedBirthday == null)
                 {
+                    user.Birthday = DoB;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidateBirthday(DoB));
+                    Console.WriteLine(validatedBirthday);
                 }
             }
 
@@ -138,13 +159,15 @@ namespace InternetBanking
             {
                 Console.WriteLine("Please Enter Phone Number: ");
                 string phoneNumber = Console.ReadLine();
-                if (validate.ValidatePhone(phoneNumber) == null)
+                string validatedPhone = validate.ValidatePhone(phoneNumber);
+                if (validatedPhone == null)
                 {
+                    user.Phone = phoneNumber;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidatePhone(phoneNumber));
+                    Console.WriteLine(validatedPhone);
                 }
             }
 
@@ -152,13 +175,15 @@ namespace InternetBanking
             {
                 Console.WriteLine("Please Enter Identity Card: ");
                 string userId = Console.ReadLine();
-                if (validate.ValidateUserId(userId) == null)
+                string validatedUserId = validate.ValidateUserId(userId);
+                if (validatedUserId == null)
                 {
+                    user.UserId = userId;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidateUserId(userId));
+                    Console.WriteLine(validatedUserId);
                 }
             }
 
@@ -166,17 +191,21 @@ namespace InternetBanking
             {
                 Console.WriteLine("Please Enter Email: ");
                 string email = Console.ReadLine();
-                if (validate.ValidateEmail(email) == null)
+                string validatedEmail = validate.ValidateEmail(email);
+                if (validatedEmail == null)
                 {
+                    user.Email = email;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(validate.ValidateEmail(email));
+                    Console.WriteLine(validatedEmail);
                 }
             }
 
-            controller.HandleSignup();
+            user.BankId = BankIdGenerator.BankIdGen(6);
+            user.CreateAt = longTime.CurrentTimeMillis();
+            controller.HandleSignup(account,user);
         }
 
         // Tạo form Menu chính.
