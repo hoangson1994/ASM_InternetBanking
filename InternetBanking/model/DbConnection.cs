@@ -29,7 +29,7 @@ namespace InternetBanking
         private void Initialize()
         {
             server = "localhost";
-            database = "asmbank";
+            database = "asm_internetbanking";
             uid = "root";
             password = "";
             string connectionString;
