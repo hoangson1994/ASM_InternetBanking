@@ -101,6 +101,67 @@ namespace InternetBanking
             
         }
 
+        public List<History> SelectBankIdByHistory(string bankId)
+        {
+            List<History> listHistory = new List<History>();
+            // viết các câu lệnh get user theo username;
+            DbConnection dbConnection = new DbConnection();
+            string query = "SELECT * FROM history WHERE sendBankId=?val1 OR receiveBankId=?val2 ";
+
+            //Create a list to store the result
+            History history = null;
+
+            //Open connection
+            if (dbConnection.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, dbConnection.Connection);
+
+                cmd.Parameters.AddWithValue("?val1", bankId);
+                cmd.Parameters.AddWithValue("?val2", bankId);
+
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+
+                    string getTradingCode = dataReader.GetString("tradingCode");
+                    string getSendBankId = dataReader.GetString("sendBankId");
+                    string getReceiveBankId = dataReader.GetString("receiveBankId");
+                    double getBalance = dataReader.GetDouble("amount");
+                    string getContent = dataReader.GetString("content");
+                    string getStatus;
+                    if (bankId == getSendBankId)
+                    {
+                        getStatus = "Send";
+                    }
+                    else
+                    {
+                        getStatus = "Receive";
+                    }
+
+                    int getCreateAt = dataReader.GetInt32("dateTransaction");
+                    history = new History(getTradingCode, getSendBankId, getReceiveBankId, getBalance, getContent, getCreateAt, getStatus);
+                    listHistory.Add(history);
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                dbConnection.CloseConnection();
+
+                //return list to be displayed
+                return listHistory;
+            }
+            else
+            {
+                return listHistory;
+            }
+        }
+
         // thêm vào bảng users khi đăng kí thành công
         public bool InsertToTableUsers(User user)
         {

@@ -8,7 +8,11 @@ namespace InternetBanking
 {
     class GenerateForm
     {
+
+        Model model = new Model();
+        Validate validate = new Validate();
         Controller controller = new Controller();
+
         // Tạo form Internet Banking.
         public void InternetBanking()
         {
@@ -73,7 +77,106 @@ namespace InternetBanking
         // Tạo form Signup .
         public void Signup()
         {
+            Console.WriteLine("========= Sign Up Form ========");
+            while (true)
+            {
+                Console.WriteLine("Please Enter Username: ");
+                string username = Console.ReadLine();
+                if (validate.ValidateUsername(username) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidateUsername(username));
+                }
+            }
 
+            while (true)
+            {
+                Console.WriteLine("Please Enter Password: ");
+                string password = Console.ReadLine();
+                if (validate.ValidatePassword(password) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidatePassword(password));
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Please Enter Fullname: ");
+                string fullName = Console.ReadLine();
+                if (validate.ValidateFullname(fullName) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidateFullname(fullName));
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Please Enter BirthDay(01-01-1990): ");
+                string DoB = Console.ReadLine();
+                if (validate.ValidateBirthday(DoB) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidateBirthday(DoB));
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Please Enter Phone Number: ");
+                string phoneNumber = Console.ReadLine();
+                if (validate.ValidatePhone(phoneNumber) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidatePhone(phoneNumber));
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Please Enter Identity Card: ");
+                string userId = Console.ReadLine();
+                if (validate.ValidateUserId(userId) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidateUserId(userId));
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Please Enter Email: ");
+                string email = Console.ReadLine();
+                if (validate.ValidateEmail(email) == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validate.ValidateEmail(email));
+                }
+            }
+
+            controller.HandleSignup();
         }
 
         // Tạo form Menu chính.

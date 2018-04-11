@@ -58,9 +58,11 @@
     <Compile Include="entity\Account.cs" />
     <Compile Include="entity\History.cs" />
     <Compile Include="entity\User.cs" />
+    <Compile Include="generatebankid\BankIdGenerator.cs" />
     <Compile Include="generatelongtime\LongTime.cs" />
     <Compile Include="main\MainThread.cs" />
     <Compile Include="MD5Encrypt\MD5.cs" />
+    <Compile Include="MD5Encrypt\SaltGenerator.cs" />
     <Compile Include="model\DbConnection.cs" />
     <Compile Include="model\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

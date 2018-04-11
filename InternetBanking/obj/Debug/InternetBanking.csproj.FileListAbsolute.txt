@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csprojResolveAssemblyReference.cache
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe.config
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.pdb
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.dll
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.xml
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
+C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb
+=======
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csprojResolveAssemblyReference.cache
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe.config
@@ -8,3 +20,4 @@ H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Da
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb
+>>>>>>> 4a77090665892df4e90b62cd52dad74ea8be883e
