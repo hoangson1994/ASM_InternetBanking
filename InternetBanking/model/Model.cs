@@ -96,9 +96,50 @@ namespace InternetBanking
 
 
         // lấy ra thông tin user theo tài khoản ngân hàng 
-        public void SelectByBankId()
+        public User SelectByBankIdFromUser(string bankId)
         {
-            
+            DbConnection dbConnection = new DbConnection();
+            // viết các câu lệnh get user theo username;
+           User user = null;
+            string query = "SELECT * FROM user where bandId ='" + username + "'";
+            //Open connection
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+                    //Create Command
+                    MySqlCommand cmd = new MySqlCommand(query, dbConnection.Connection);
+                    //Create a data reader and Execute the command
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    if (dataReader.Read())
+                    {
+                        string usernameDb = dataReader.GetString("username");
+                        string fullName = dataReader.GetString("fullName");
+                        string bankIdDb = dataReader.GetString("bankId");
+                        double balance = dataReader.GetDouble("balance");
+                        long birthday = dataReader.GetInt64("birthday");
+                        string phone = dataReader.GetString("phone");
+                        int gender = dataReader.GetInt32("gender");
+                        string userId = dataReader.GetString("userId");
+                        string email = dataReader.GetString("email");
+                        int status = dataReader.GetInt32("status");
+                        long createAt = dataReader.GetInt64("createAt");
+                        long updateAt = dataReader.GetInt64("updateAt");
+                        user = new User(usernameDb, bankIdDb, balance, fullName, birthday, phone, gender, userId, email, status, createAt, updateAt);
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    dbConnection.CloseConnection();
+                    return user;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            return user;
         }
 
         // thêm vào bảng users khi đăng kí thành công
@@ -179,7 +220,7 @@ namespace InternetBanking
         // transaction mysql
         public void Transactions()
         {
-          
+           
         }
     }
 }

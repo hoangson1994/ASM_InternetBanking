@@ -208,8 +208,8 @@ namespace InternetBanking
 
         // Tạo form chuyển khoản.
         public void Transfer()
-        {        
-
+        {
+          
         }
 
         // Tạo form tra cứu lịch sử giao dịch
