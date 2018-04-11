@@ -1,0 +1,20 @@
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csprojResolveAssemblyReference.cache
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe.config
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.pdb
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.dll
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.xml
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
+H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe.config
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\bin\Debug\InternetBanking.pdb
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\bin\Debug\MySql.Data.dll
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\bin\Debug\MySql.Data.xml
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\obj\Debug\InternetBanking.csprojResolveAssemblyReference.cache
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
+C:\Users\SonPC\Documents\Visual Studio 2017\Projects\InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb

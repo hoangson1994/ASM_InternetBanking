@@ -13,5 +13,7 @@ namespace InternetBanking.generatelongtime
         {
             return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
         }
+
+
     }
 }
