@@ -17,6 +17,7 @@ namespace InternetBanking
         private string password;
 
         public MySqlConnection Connection { get => connection; set => connection = value; }
+        public MySqlConnection Connection1 { get => connection; set => connection = value; }
 
         //Constructor
         public DbConnection()
