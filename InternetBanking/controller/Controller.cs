@@ -8,15 +8,37 @@ namespace InternetBanking
 {
     class Controller
     {
+        Model model = new Model();
         public bool HandleLogin(string username, string password)
         {
             // gọi hàm SelectByUsername(username).
+
+            Account account = model.SelectByUsernameFromTableAccount(username);
+            if (account != null)
+            {
+                string passwordDB = account.Password;
+                string passwordLogin = MD5.CreateMD5(password + account.Salt);
+                if (passwordDB.Equals(passwordLogin))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
             // nếu hàm trả về 1 user: 
             //  - so sánh password nhập vào và pass lưu trong database: == thì return true còn != return false (có muối);
             // nếu hàm trả về null thì return false(đăng nhập không thành công); 
 
-            return true;
+
         }
+    
 
         // viết các câu lệnh xử lí phần đăng kí
         public void HandleSignup()
