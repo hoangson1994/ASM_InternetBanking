@@ -10,6 +10,7 @@ namespace InternetBanking
     {
         Model model = new Model();
         User user;
+        LongTime longTime = new LongTime();
         public bool HandleLogin(string username, string password)
         {
             // gọi hàm SelectByUsername(username).
@@ -76,6 +77,29 @@ namespace InternetBanking
         // viết các câu lệnh xử lí phần xem lịch sử giao dịch
         public void HandleTransactionHistory()
         {
+            List<History> history = model.SelectBankIdByHistory(user.BankId);
+            if (history != null)
+            {
+                Console.WriteLine("Status" + "\t |" + "TradingCode" + "\t |" + "SendBankId" + "\t |" + "ReceiveBankld" + "\t |" + "Balance (VND)" + "\t\t |" +"Content"+ "\t |" + "Daytrading");
+                Console.WriteLine("========================================================================================================================");
+                for (int i = 0; i < history.Count; i++)
+                {
+                    Console.WriteLine(history[i].Status
+                        + "\t |" + history[i].TradingCode
+                        + "\t\t |" + history[i].SendBankId
+                        + "\t\t |" + history[i].ReceiveBankId
+                        + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
+                        + "\t\t |" + history[i].Content
+                        + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
+                }
+                Console.WriteLine("========================================================================================================================");
+
+
+            }
+            else
+            {
+                Console.WriteLine("ERROR");
+            }
 
         }
     }

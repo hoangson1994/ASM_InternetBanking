@@ -18,6 +18,7 @@ namespace InternetBanking
                 Console.WriteLine("1. Login.");
                 Console.WriteLine("2. Signup.");
                 Console.WriteLine("3. Exit.");
+                Console.WriteLine("Please enter your choice: ");
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
@@ -78,11 +79,48 @@ namespace InternetBanking
         // Tạo form Menu chính.
         public void Menu()
         {
-            //1. thông tin  người dùng
-            //2. truy vấn số dư
-            //3. rút tiền
-            //4. chuyển khoản
-            //5. lịch sử giao dịch
+            int exit = 0;
+            while (exit == 0)
+            {
+                Console.WriteLine("========Generate Menu========");
+                //1. thông tin  người dùng
+                Console.WriteLine("1. Info");
+                //2. truy vấn số dư
+                Console.WriteLine("2. Balance inquiry");
+                //3. rút tiền
+                Console.WriteLine("3. Withdrawal");
+                //4. chuyển khoản
+                Console.WriteLine("4. Transfer");
+                //5. lịch sử giao dịch
+                Console.WriteLine("5. Transaction history");
+                Console.WriteLine("6. Logout.");
+                Console.WriteLine("Please enter your choice: ");
+                int choiceMenu = int.Parse(Console.ReadLine());
+                switch (choiceMenu)
+                {
+                    case 1:
+                        InfoUser();
+                        break;
+                    case 2:
+                        QueryBalance();
+                        break;
+                    case 3:
+                        Withdrawal();
+                        break;
+                    case 4:
+                        Transfer();
+                        break;
+                    case 5:
+                        TransactionHistory();
+                        break;
+                    case 6:
+                        exit = 1;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter to 1 from 5.");
+                        break;
+                }
+            }
         }
 
         // Tạo form thông tin người dùng.
@@ -112,7 +150,7 @@ namespace InternetBanking
         // Tạo form tra cứu lịch sử giao dịch
         public void TransactionHistory()
         {
-
+            controller.HandleTransactionHistory();
         }
     }
 }
