@@ -31,7 +31,7 @@ namespace InternetBanking
                         string fullName = dataReader.GetString("fullName");
                         string bankId = dataReader.GetString("bankId");
                         double balance = dataReader.GetDouble("balance");
-                        long birthday = dataReader.GetInt64("birthday");
+                        string birthday = dataReader.GetString("birthday");
                         string phone = dataReader.GetString("phone");
                         int gender = dataReader.GetInt32("gender");
                         string userId = dataReader.GetString("userId");
@@ -101,7 +101,7 @@ namespace InternetBanking
             DbConnection dbConnection = new DbConnection();
             // viết các câu lệnh get user theo username;
            User user = null;
-            string query = "SELECT * FROM user where bandId ='" + username + "'";
+            string query = "SELECT * FROM user where bandId ='" + bankId + "'";
             //Open connection
             if (dbConnection.OpenConnection() == true)
             {
@@ -117,7 +117,7 @@ namespace InternetBanking
                         string fullName = dataReader.GetString("fullName");
                         string bankIdDb = dataReader.GetString("bankId");
                         double balance = dataReader.GetDouble("balance");
-                        long birthday = dataReader.GetInt64("birthday");
+                        string birthday = dataReader.GetString("birthday");
                         string phone = dataReader.GetString("phone");
                         int gender = dataReader.GetInt32("gender");
                         string userId = dataReader.GetString("userId");
@@ -147,7 +147,7 @@ namespace InternetBanking
         {
             DbConnection dbConnection = new DbConnection();
             string query = "INSERT INTO user (username, bankId, balance, fullname, birthday, phone, gender, userId, email, status, createAt) VALUES('"+ user.Username +"','"+ user.BankId +"', "+ user.Balance+", " +
-                           "'"+ user.Fullname+"', "+user.Birthday+", '"+user.Phone+"',"+user.Gender+",'"+user.UserId+"','"+user.Email+"',"+user.Status+","+user.CreateAt+")";
+                           "'"+ user.Fullname+"', '"+user.Birthday+"', '"+user.Phone+"',"+user.Gender+",'"+user.UserId+"','"+user.Email+"',"+user.Status+","+user.CreateAt+")";
 
             //open connection
             if (dbConnection.OpenConnection() == true)
