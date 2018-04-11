@@ -12,6 +12,7 @@ namespace InternetBanking
         {
             GenerateForm gf = new GenerateForm();
             gf.InternetBanking();
+
             Console.ReadLine();
         }
     }
