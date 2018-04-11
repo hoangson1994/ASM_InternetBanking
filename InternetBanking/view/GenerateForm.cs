@@ -16,15 +16,57 @@ namespace InternetBanking
         // Tạo form Internet Banking.
         public void InternetBanking()
         {
-            Transfer();
+            while (true)
+            {
+                Console.WriteLine("========Wellcom to InternetBanking========");
+                Console.WriteLine("1. Login.");
+                Console.WriteLine("2. Signup.");
+                Console.WriteLine("3. Exit.");
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Login();
+                        break;
+                    case 2:
+                        Signup();
+                        break;
+                    case 3:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please enter from 1 to 3 !!!");
+                        break;
+                }
+            }
         }
 
         // Tạo form Login.
         public void Login()
         {
             // cho người dùng nhập username.
+            Console.WriteLine("Please enter your username: ");
+            String username = Console.ReadLine();
+
             // cho người dùng nhập password.
+
+            Console.WriteLine("Please enter your password: ");
+            String password = Console.ReadLine();
+
+
+
             // gọi hàm HandleLogin(username, password); 
+            if (controller.HandleLogin(username, password))
+            {
+                Console.WriteLine("Login Success.");
+                Menu();
+            }
+            else
+            {
+                Console.WriteLine("Login error. Please check again username or password. !!!");
+            }
+
             // nếu hàm trả về true .....(các xử lí tiếp theo, như gọi đến hàm Menu());
             // nếu hàm trả về false - thông báo đăng nhập khoog thành công ;
 
