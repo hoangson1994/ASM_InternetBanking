@@ -93,7 +93,10 @@ namespace InternetBanking
             return account;
         }
 
-
+        public List<History> SelectByUsernameFromTableHistory(string bankId)
+        {
+            return null;
+        }
 
         // lấy ra thông tin user theo tài khoản ngân hàng 
         public void SelectByBankId()

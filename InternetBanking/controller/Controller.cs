@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace InternetBanking
 {
     class Controller
     {
+        User user;
         public bool HandleLogin(string username, string password)
         {
             // gọi hàm SelectByUsername(username).
@@ -33,7 +35,15 @@ namespace InternetBanking
         // viết các câu lệnh xử lí phần truy vấn số dư
         public void HandleQueryBalance()
         {
-
+            Console.WriteLine("Số tài khoản: " + user.BankId);
+            Console.WriteLine("Tên: " + user.Fullname);
+            Console.WriteLine("Số tiền hiện tại: " + user.Balance);
+            Console.WriteLine("5 lần giao dịch gần nhất:");
+            Model model = new Model();
+            List<History> listHistory = model.SelectByUsernameFromTableHistory(user.BankId);
+            String s = String.Format("{0,15} {1,15} {2,15} {3,15} {4,50}\n\n\n\n\n", "Mã Giao Dịch", "STK Gửi", "STK Nhận", "Số Tiền", "Nội dung");
+            for (int i = 0; i < 5; i++)
+                s += String.Format("{0,15} {1,15} {2,15} {3,15} {4,50:N0}\n", listHistory[i].TradingCode, listHistory[i].SendBankId, listHistory[i].ReceiveBankId, listHistory[i].Amount, listHistory[i].Content);
         }
 
         // viết các câu lệnh xử lí phần rút tiền

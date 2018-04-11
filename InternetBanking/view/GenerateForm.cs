@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InternetBanking
 {
@@ -54,7 +55,8 @@ namespace InternetBanking
         // Tạo form truy vấn số dư.
         public void QueryBalance()
         {
-
+            Controller controller = new Controller();
+            controller.HandleQueryBalance();
         }
 
         // Tạo form rút tiền.

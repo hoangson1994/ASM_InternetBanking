@@ -1,0 +1,2 @@
+C:\Users\thong\source\repos\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csprojResolveAssemblyReference.cache
+C:\Users\thong\source\repos\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
