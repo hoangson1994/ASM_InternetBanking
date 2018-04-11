@@ -79,28 +79,37 @@ namespace InternetBanking
         public void HandleTransactionHistory()
         {
             List<History> history = model.SelectBankIdByHistory(user.BankId);
-            if (history != null)
-            {
-                Console.WriteLine("Status" + "\t |" + "TradingCode" + "\t |" + "SendBankId" + "\t |" + "ReceiveBankld" + "\t |" + "Balance (VND)" + "\t\t |" +"Content"+ "\t |" + "Daytrading");
-                Console.WriteLine("========================================================================================================================");
+            
+        
+            
+                Console.WriteLine("Status" + "\t |" + "TradingCode" + "\t |" + "Change" + "\t |" + "Amount (VND)" + "\t\t |" +"Content"+ "\t |" + "Date Transaction");
+                Console.WriteLine("========================================================================================================");
                 for (int i = 0; i < history.Count; i++)
                 {
+                    if(user.BankId == history[i].SendBankId)
+                    {
+
+                    history[i].Status = "Send";
+                    history[i].ReceiveBankId = "-";
+
+
+                    }
+                    else
+                    {
+                        history[i].Status = "Receive";
+                        history[i].ReceiveBankId = "+";
+                }
                     Console.WriteLine(history[i].Status
                         + "\t |" + history[i].TradingCode
-                        + "\t\t |" + history[i].SendBankId
-                        + "\t\t |" + history[i].ReceiveBankId
+                        + "\t\t |  " + history[i].ReceiveBankId
                         + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
                         + "\t\t |" + history[i].Content
                         + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
                 }
-                Console.WriteLine("========================================================================================================================");
+                Console.WriteLine("========================================================================================================");
 
 
-            }
-            else
-            {
-                Console.WriteLine("ERROR");
-            }
+            
 
         }
     }

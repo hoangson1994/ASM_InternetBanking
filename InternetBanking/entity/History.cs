@@ -22,16 +22,7 @@ namespace InternetBanking
 
         }
 
-        public History(string tradingCode, string sendBankId, string receiveBankId, double amount, string content, long dateTransaction, string status)
-        {
-            this.TradingCode = tradingCode;
-            this.SendBankId = sendBankId;
-            this.ReceiveBankId = receiveBankId;
-            this.Amount = amount;
-            this.Content = content;
-            this.DateTransaction = dateTransaction;
-            this.Status = status;
-        }
+       
 
         public History(string tradingCode, string sendBankId, string receiveBankId, double amount, string content)
         {
@@ -44,7 +35,15 @@ namespace InternetBanking
             this.DateTransaction = longtime.CurrentTimeMillis();
         }
 
-        
+        public History(string tradingCode, string sendBankId, string receiveBankId, double amount, string content, long dateTransaction)
+        {
+            this.tradingCode = tradingCode;
+            this.sendBankId = sendBankId;
+            this.receiveBankId = receiveBankId;
+            this.amount = amount;
+            this.content = content;
+            this.dateTransaction = dateTransaction;
+        }
 
         public string TradingCode { get => tradingCode; set => tradingCode = value; }
         public string SendBankId { get => sendBankId; set => sendBankId = value; }
