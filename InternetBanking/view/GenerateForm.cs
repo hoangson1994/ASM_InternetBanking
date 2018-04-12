@@ -25,8 +25,19 @@ namespace InternetBanking
                 Console.WriteLine("1. Login.");
                 Console.WriteLine("2. Signup.");
                 Console.WriteLine("3. Exit.");
-                Console.WriteLine("Please enter your choice: ");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 0;
+                while (choice == 0 || choice > 3)
+                {
+                    Console.WriteLine("Please enter your choice: ");
+                    try
+                    {
+                        choice = int.Parse(Console.ReadLine());
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
 
                 switch (choice)
                 {
@@ -205,7 +216,7 @@ namespace InternetBanking
 
             user.BankId = BankIdGenerator.BankIdGen(6);
             user.CreateAt = longTime.CurrentTimeMillis();
-            controller.HandleSignup(account,user);
+            controller.HandleSignup(account, user);
         }
 
         // Tạo form Menu chính.
@@ -226,8 +237,20 @@ namespace InternetBanking
                 //5. lịch sử giao dịch
                 Console.WriteLine("5. Transaction history");
                 Console.WriteLine("6. Logout.");
-                Console.WriteLine("Please enter your choice: ");
-                int choiceMenu = int.Parse(Console.ReadLine());
+                int choiceMenu = 0;
+                while (choiceMenu == 0 || choiceMenu > 6)
+                {
+                    Console.WriteLine("Please enter your choice: ");
+                    try
+                    {
+                        choiceMenu = int.Parse(Console.ReadLine());
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
+
                 switch (choiceMenu)
                 {
                     case 1:
@@ -275,7 +298,7 @@ namespace InternetBanking
 
         // Tạo form chuyển khoản.
         public void Transfer()
-        {        
+        {
 
         }
 

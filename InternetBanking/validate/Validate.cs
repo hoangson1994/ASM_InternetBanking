@@ -13,7 +13,7 @@ namespace InternetBanking
         public string ValidateUsername(string txt)
         {
             Regex regex = new Regex("[a-zA-Z0-9]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 return MapEntity.mapError["username"].ErrorEmpty;
             }
@@ -37,7 +37,7 @@ namespace InternetBanking
         public string ValidatePassword(string txt)
         {
             Regex regex = new Regex("[a-zA-Z0-9]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 return MapEntity.mapError["password"].ErrorEmpty;
             }
@@ -61,7 +61,7 @@ namespace InternetBanking
         public string ValidateFullname(string txt)
         {
             Regex regex = new Regex("[a-zA-z\\s][a-zA-z\\s][a-zA-z]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 return MapEntity.mapError["fullName"].ErrorEmpty;
             }
@@ -85,7 +85,7 @@ namespace InternetBanking
         public string ValidateBirthday(string txt)
         {
             Regex regex = new Regex("[0-9/][0-9/][0-9]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
               return MapEntity.mapError["birthday"].ErrorEmpty;
             }
@@ -110,7 +110,7 @@ namespace InternetBanking
         public string ValidatePhone(string txt)
         {
             Regex regex = new Regex("[0-9]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 return MapEntity.mapError["phone"].ErrorEmpty;
             }
@@ -134,7 +134,7 @@ namespace InternetBanking
         public string ValidateUserId(string txt)
         {
             Regex regex = new Regex("[0-9]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 return MapEntity.mapError["userId"].ErrorEmpty;
             }
@@ -158,7 +158,7 @@ namespace InternetBanking
         public string ValidateEmail(string txt)
         {
             Regex regex = new Regex("[A-Za-z0-9_]@[a-zA-Z].[a-zA-Z]");
-            if (txt == null)
+            if (txt == null || Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 return MapEntity.mapError["email"].ErrorEmpty;
             }
