@@ -1,9 +1,0 @@
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Release\InternetBanking.exe.config
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Release\InternetBanking.exe
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Release\InternetBanking.pdb
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Release\MySql.Data.dll
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\bin\Release\MySql.Data.xml
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Release\InternetBanking.csproj.CoreCompileInputs.cache
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Release\InternetBanking.csproj.CopyComplete
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Release\InternetBanking.exe
-C:\Users\hoang\Desktop\git\ASM_InternetBanking\InternetBanking\obj\Release\InternetBanking.pdb
