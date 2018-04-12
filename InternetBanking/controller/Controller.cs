@@ -75,7 +75,12 @@ namespace InternetBanking
         // viết các câu lệnh xử lí phần thông tin người dùng
         public void HandleInforUser()
         {
-
+            Console.WriteLine("Full Name: " + user.Fullname);
+            Console.WriteLine("Bank Id: " + user.BankId);
+            Console.WriteLine("Birthday :" + user.Birthday);
+            Console.WriteLine("Gender: " + (user.Gender == 0 ? "Female" : (user.Gender == 1 ? "Male" : "Other")));
+            Console.WriteLine("Phone: " + user.Phone);
+            Console.WriteLine("Email: " + user.Email);
         }
 
         // viết các câu lệnh xử lí phần truy vấn số dư
