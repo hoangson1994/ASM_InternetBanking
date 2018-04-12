@@ -15,6 +15,7 @@ namespace InternetBanking
         Validate validate = new Validate();
         Controller controller = new Controller();
         LongTime longTime = new LongTime();
+        int gender = 0;
 
         // Tạo form Internet Banking.
         public void InternetBanking()
@@ -214,6 +215,38 @@ namespace InternetBanking
                 }
             }
 
+            while (true)
+            {
+                    Console.WriteLine("Please Enter Gender: ");
+                    string inputGender = Console.ReadLine();
+                    string validateGender = validate.ValidateGender(inputGender);
+                    if (validateGender == null)
+                    {
+                        switch (inputGender)
+                        {
+                            case "female":
+                                gender = 0;
+                                break;
+                            case "male":
+                                gender = 1;
+                                break;
+                            case "other":
+                                gender = 2;
+                                break;
+                            default:
+                                Console.WriteLine("Gender incorrect. Please re-enter gender.");
+                                break;
+                        }
+
+                        user.Gender = gender;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(validateGender);
+                    }
+            }
+
             user.BankId = BankIdGenerator.BankIdGen(6);
             user.CreateAt = longTime.CurrentTimeMillis();
             controller.HandleSignup(account, user);
@@ -281,7 +314,7 @@ namespace InternetBanking
         // Tạo form thông tin người dùng.
         public void InfoUser()
         {
-
+            controller.HandleInforUser();
         }
 
         // Tạo form truy vấn số dư.

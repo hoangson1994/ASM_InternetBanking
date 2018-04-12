@@ -231,9 +231,9 @@ namespace InternetBanking
         }
 
         // update số dư tài khoản của người nhận và người chuyển khi thực hiện chuyển khoản.
-        public void Update()
+        public bool Update(Account account)
         {
-
+            return false;
         }
 
         // transaction mysql
