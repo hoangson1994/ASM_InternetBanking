@@ -179,5 +179,6 @@ namespace InternetBanking
                 return MapEntity.mapError["email"].ErrorCharacter;
             }
         }
+      
     }
 }
