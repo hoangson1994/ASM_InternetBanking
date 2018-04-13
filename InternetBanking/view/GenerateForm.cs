@@ -264,7 +264,7 @@ namespace InternetBanking
         // Tạo form truy vấn số dư.
         public void QueryBalance()
         {
-
+            controller.HandleQueryBalance();
         }
 
         // Tạo form rút tiền.
