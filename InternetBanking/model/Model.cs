@@ -224,15 +224,68 @@ namespace InternetBanking
         }
 
         // thêm vào bảng history khi chuyển khoản thành công
-            public void InsertToTableHistory()
+        public void InsertToTableHistory(string userName, Double amount)
         {
-      
+            DbConnection dbConnection = new DbConnection();
+            Random rnd = new Random();
+            int rndnumber = rnd.Next();
+            //câu lệnh lưu lịch sử rút tiền 
+            string historyOfWithdrawals = "INSERT INTO history (tradingCode, sendBankId	, receiveBankId, amount, content) VALUES('"
+                + rndnumber + "','" + userName + "','" + userName + "','" + amount + "','"
+                + "account " + userName + " have withdrawn " + amount.ToString() + "')";
 
+            //open connection
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(historyOfWithdrawals, dbConnection.Connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+
+                    //close connection
+                    dbConnection.CloseConnection();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
         }
 
         // update số dư tài khoản của người nhận và người chuyển khi thực hiện chuyển khoản.
-        public void Update()
+        public void Update(Double balance, string userName)
         {
+            DbConnection dbConnection = new DbConnection();
+
+            DateTime Jan1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan javaSpan = DateTime.UtcNow - Jan1970;
+            Double updateAt = javaSpan.TotalMilliseconds;
+
+            //câu lệnh cập nhập số dư sau khi rút tiền
+            string updateBalance = "UPDATE user SET balance = '" + balance + "',updateAt = '" + updateAt + "' WHERE username ='" + userName + "'";
+
+            //open connection
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(updateBalance, dbConnection.Connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+
+                    //close connection
+                    dbConnection.CloseConnection();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
 
         }
 

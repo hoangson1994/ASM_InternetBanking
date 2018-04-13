@@ -69,6 +69,7 @@
     <Compile Include="validate\ErrorEntity.cs" />
     <Compile Include="validate\MapError.cs" />
     <Compile Include="validate\Validate.cs" />
+    <Compile Include="validate\ValidateBalance.cs" />
     <Compile Include="view\GenerateForm.cs" />
   </ItemGroup>
   <ItemGroup>

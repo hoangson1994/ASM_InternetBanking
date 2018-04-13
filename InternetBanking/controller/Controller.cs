@@ -87,6 +87,91 @@ namespace InternetBanking
         // viết các câu lệnh xử lí phần rút tiền
         public void HandleWithdrawal()
         {
+            ValidateBalane validateBlane = new ValidateBalane();
+            Model model = new Model();
+
+            //tạo biến cho người dùng nhập vào
+            int choise;
+            Double WithdrawalAmount = 0;
+
+            // cho người dùng nhập vào lựa chọn
+            choise = int.Parse(Console.ReadLine());
+
+            User user = model.SelectByUsernameFromTableUser("loc");
+
+            Boolean checkBlance = false;
+
+            switch (choise)
+            {
+                case 1:
+                    WithdrawalAmount = 100000;
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                case 2:
+                    WithdrawalAmount = 200000;
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                case 3:
+                    WithdrawalAmount = 500000;
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                case 4:
+                    WithdrawalAmount = 1000000;
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                case 5:
+                    WithdrawalAmount = 2000000;
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                case 6:
+                    WithdrawalAmount = 5000000;
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                case 7:
+                    // cho người dùng nhập số tiền muốn rút ra 
+                    WithdrawalAmount = double.Parse(Console.ReadLine());
+                    checkBlance = validateBlane.CheckBlance(WithdrawalAmount);
+                    if (checkBlance)
+                    {
+                        user.Balance -= WithdrawalAmount;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Ban chon chua dung");
+                    break;
+            }
+            if (checkBlance)
+            {
+                //trừ đi số tiền trong tài khoản trên dâtbase
+                model.Update(user.Balance, user.Username);
+                //lưu lịch sử rút tiền
+                model.InsertToTableHistory(user.Username, WithdrawalAmount);
+                Console.WriteLine("withdraw money successfully");
+            }
 
         }
 

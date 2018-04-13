@@ -11,9 +11,9 @@ namespace InternetBanking
         static void Main(string[] args)
         {
             GenerateForm gf = new GenerateForm();
-            gf.InternetBanking();
+            gf.Withdrawal();
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }

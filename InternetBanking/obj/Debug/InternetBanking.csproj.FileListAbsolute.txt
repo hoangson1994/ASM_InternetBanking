@@ -8,3 +8,11 @@ H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\Internet
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
 H:\FPT\Ki II\C#\Asm_clone\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\bin\Debug\InternetBanking.exe.config
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.dll
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\bin\Debug\MySql.Data.xml
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CoreCompileInputs.cache
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.csproj.CopyComplete
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.exe
+D:\Project\c#\ASM_InternetBanking\ASM_InternetBanking\InternetBanking\obj\Debug\InternetBanking.pdb

@@ -270,6 +270,20 @@ namespace InternetBanking
         // Tạo form rút tiền.
         public void Withdrawal()
         {
+            // hiển thị cho người dùng lựa chọn
+            Console.WriteLine("---------------------------------- Withdrawal -----------------------------");
+            Console.WriteLine("1. 100 000");
+            Console.WriteLine("2. 200 000");
+            Console.WriteLine("3. 500 000");
+            Console.WriteLine("4. 1 000 000");
+            Console.WriteLine("5. 2 000 000");
+            Console.WriteLine("6. 5 000 000");
+            Console.WriteLine("7. another choice");
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine(" please enter you choise ");
+
+            Controller controller = new Controller();
+            controller.HandleWithdrawal();
 
         }
 
