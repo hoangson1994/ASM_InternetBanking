@@ -18,6 +18,7 @@ namespace InternetBanking
             ErrorEntity phone = new ErrorEntity("Phone can not empty", "Phone not enough length ( 10 characters)", "Phone incorect character (0-9)");
             ErrorEntity userId = new ErrorEntity("Identity Card can not empty", "Identity Card ( 11 characters)", "Identity Card incorrect character (0-9)");
             ErrorEntity email = new ErrorEntity("Email can not empty", "Email not enough length (10 characters)", "Email incorrect form (with @gmail.com or other)");
+            ErrorEntity gender = new ErrorEntity("Gender can not empty", "Gender incorrect form (female or male or other.)", "Gender incorrect form (female or male or other.)");
 
             mapError.Add("username", username);
             mapError.Add("password", password);
@@ -26,6 +27,7 @@ namespace InternetBanking
             mapError.Add("phone", phone);
             mapError.Add("userId", userId);
             mapError.Add("email", email);
+            mapError.Add("gender", gender);
         }
 
     }

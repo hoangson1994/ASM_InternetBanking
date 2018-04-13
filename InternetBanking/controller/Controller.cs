@@ -65,9 +65,17 @@ namespace InternetBanking
         }
 
         // viết các câu lệnh xử lí phần thông tin người dùng
-        public void HandleInforUser()
+        public void HandleShowInforUser()
         {
-
+            Console.WriteLine("Full Name" + "\t|\t" + "Bank Id" + "\t|\t" + "Birthday" + "\t|\t" + "Gender" + "\t|\t" + "Phone" + "\t\t\t|\t\t" + "Email");
+            Console.WriteLine("==========================================================================================================================================\n");
+            Console.WriteLine(userLogin.Fullname
+                              + "\t|\t" + userLogin.BankId
+                              + "\t|\t" + userLogin.Birthday
+                              + "\t|\t" + (userLogin.Gender == 0 ? "Female" : (userLogin.Gender == 1 ? "Male" : "Other"))
+                              + "\t|\t" + userLogin.Phone
+                              + "\t\t|\t\t" + userLogin.Email);
+            Console.WriteLine("\n==========================================================================================================================================");
         }
 
         // viết các câu lệnh xử lí phần truy vấn số dư
@@ -184,6 +192,11 @@ namespace InternetBanking
             Console.WriteLine("{0,-10} {1,25} {2,25} {3,25} {4,25} {5,25}", "Source BankId ", "Beneficiaries BankId", "Beneficiary Name", "Money Amount", "Transaction Date", "Content");
             Console.WriteLine("{0,-10} {1,29} {2,25} {3,25} {4,25} {5,25}", userLogin.BankId, userBeneficiaries.BankId, userBeneficiaries.Fullname, amount.ToString("N1", CultureInfo.InvariantCulture), DateTime.Now.ToString(), content);
         }
+        public void HandleEditInfoUser(string colum, string userEdit)
+        {
 
+            model.Update(userLogin.Username, colum, userEdit);
+            userLogin = model.SelectByUsernameFromTableUser(userLogin.Username);
+        }
     }
 }

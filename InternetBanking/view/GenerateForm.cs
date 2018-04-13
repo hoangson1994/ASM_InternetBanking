@@ -24,8 +24,20 @@ namespace InternetBanking
                 Console.WriteLine("1. Login.");
                 Console.WriteLine("2. Signup.");
                 Console.WriteLine("3. Exit.");
-                Console.WriteLine("Please enter your choice: ");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 0;
+                while (true)
+                {
+                    Console.WriteLine("Please enter your choice: ");
+                    try
+                    {
+                        choice = int.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("Your choice invalid. Please input only number.");
+                    }
+                }
 
                 switch (choice)
                 {
@@ -202,6 +214,40 @@ namespace InternetBanking
                 }
             }
 
+            while (true)
+            {
+                Console.WriteLine("Please Enter Gender: ");
+                string inputGender = Console.ReadLine();
+                inputGender = inputGender.ToLower();
+                string validateGender = validate.ValidateGender(inputGender);
+                int gender = 0;
+                if (validateGender == null)
+                {
+                    switch (inputGender)
+                    {
+                        case "f":
+                            gender = 0;
+                            break;
+                        case "m":
+                            gender = 1;
+                            break;
+                        case "o":
+                            gender = 2;
+                            break;
+                        default:
+                            Console.WriteLine("Gender incorrect. Please re-enter gender.");
+                            break;
+                    }
+
+                    user.Gender = gender;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(validateGender);
+                }
+            }
+
             user.BankId = StringGenerator.NumberGen(6);
             user.CreateAt = longTime.CurrentTimeMillis();
             controller.HandleSignup(account,user);
@@ -226,9 +272,20 @@ namespace InternetBanking
                 Console.WriteLine("5. Transaction history");
 
                 Console.WriteLine("6. Logout.");
-
-                Console.WriteLine("Please enter your choice: ");
-                int choiceMenu = int.Parse(Console.ReadLine());
+                int choiceMenu = 0;
+                while (true)
+                {
+                    Console.WriteLine("Please enter your choice: ");
+                    try
+                    {
+                        choiceMenu = int.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("Your choice invalid. Please input only number.");
+                    }
+                }
                 switch (choiceMenu)
                 {
                     case 1:
@@ -259,9 +316,231 @@ namespace InternetBanking
         // Tạo form thông tin người dùng.
         public void InfoUser()
         {
+            int exit = 0;
+            while (exit == 0)
+            {
+                Console.WriteLine("====== Menu Info User =======");
+                Console.WriteLine("1. Show User Information.");
+                Console.WriteLine("2. Edit Information.");
+                Console.WriteLine("3. Back to Menu.");
+                int choice = 0;
+                while (choice == 0 || choice > 3)
+                {
+                    Console.WriteLine("Please enter your choice: ");
+                    try
+                    {
+                        choice = int.Parse(Console.ReadLine());
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("Your choice invalid. Please input only number.");
+                    }
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        controller.HandleShowInforUser();
+                        break;
+                    case 2:
+                        UpdateUser();
+                        break;
+                    case 3:
+                        exit = 1;
+                        break;
+                    default:
+                        Console.WriteLine("Your choice invalid. Please re-enter your choice.");
+                        break;
+                }
+            }
+
 
         }
+        public void UpdateUser()
+        {
+            User user = new User();
+            int exit = 0;
+            while (exit == 0)
+            {
+                Console.WriteLine("====== Update Info User =======");
+                Console.WriteLine("1. Edit Phone Number.");
+                Console.WriteLine("2. Edit Email.");
+                Console.WriteLine("3. Edit Birthday.");
+                Console.WriteLine("4. Edit Identity Card.");
+                Console.WriteLine("5. Back to the Menu.");
+                int choice = 0;
+                while (true)
+                {
+                    Console.WriteLine("Please enter your choice: ");
+                    try
+                    {
+                        choice = int.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("Your choice invalid. Please input only number.");
+                    }
+                }
 
+                switch (choice)
+                {
+                    case 1:
+                        int exitPhone = 0;
+                        while (exitPhone == 0)
+                        {
+                            Console.WriteLine("Please Enter Phone Number Update: ");
+                            string updatePhone = Console.ReadLine();
+                            string validatePhone = validate.ValidatePhone(updatePhone);
+                            if (validatePhone == null)
+                            {
+                                while (exitPhone == 0)
+                                {
+                                    Console.WriteLine("Do you want to update Phone Number? (Y/n)");
+                                    string choiceyn = Console.ReadLine();
+                                    choiceyn = choiceyn.ToLower();
+                                    switch (choiceyn)
+                                    {
+                                        case "y":
+                                            user.Phone = updatePhone;
+                                            controller.HandleEditInfoUser("phone", updatePhone);
+                                            exitPhone = 1;
+                                            break;
+                                        case "n":
+                                            exitPhone = 1;
+                                            break;
+                                        default:
+                                            Console.WriteLine("Only input Y or N");
+                                            break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(validatePhone);
+                            }
+                        }
+
+                        break;
+                    case 2:
+                        int exitUpdateEmail = 0;
+                        while (exitUpdateEmail == 0)
+                        {
+                            Console.WriteLine("Please Enter Email Update: ");
+                            string updateEmail = Console.ReadLine();
+                            string validatedEmail = validate.ValidateEmail(updateEmail);
+                            if (validatedEmail == null)
+                            {
+                                while (exitUpdateEmail == 0)
+                                {
+                                    Console.WriteLine("Do you want to update Email? (Y/n)");
+                                    string choiceyn = Console.ReadLine();
+                                    choiceyn = choiceyn.ToLower();
+                                    switch (choiceyn)
+                                    {
+                                        case "y":
+                                            user.Email = updateEmail;
+                                            controller.HandleEditInfoUser("email", updateEmail);
+                                            exitUpdateEmail = 1;
+                                            break;
+                                        case "n":
+                                            exitUpdateEmail = 1;
+                                            break;
+                                        default:
+                                            Console.WriteLine("Only input Y or N");
+                                            break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(validatedEmail);
+                            }
+                        }
+                        break;
+                    case 3:
+                        int exitBirthday = 0;
+                        while (exitBirthday == 0)
+                        {
+                            Console.WriteLine("Please Enter Birthday Update: ");
+                            string updateDob = Console.ReadLine();
+                            string validatedBirthday = validate.ValidateBirthday(updateDob);
+                            if (validatedBirthday == null)
+                            {
+                                while (exitBirthday == 0)
+                                {
+                                    Console.WriteLine("Do you want to update Birthday? (Y/n)");
+                                    string choiceyn = Console.ReadLine();
+                                    choiceyn = choiceyn.ToLower();
+                                    switch (choiceyn)
+                                    {
+                                        case "y":
+                                            user.Birthday = updateDob;
+                                            controller.HandleEditInfoUser("birthday", updateDob);
+                                            exitBirthday = 1;
+                                            break;
+                                        case "n":
+                                            exitBirthday = 1;
+                                            break;
+                                        default:
+                                            Console.WriteLine("Only input Y or N");
+                                            break;
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                Console.WriteLine(validatedBirthday);
+                            }
+                        }
+                        break;
+                    case 4:
+                        int exitIdentityCard = 0;
+                        while (exitIdentityCard == 0)
+                        {
+                            Console.WriteLine("Please Enter Identity Card Update: ");
+                            string updateIdentityCard = Console.ReadLine();
+                            string validateIdentityCard = validate.ValidateUserId(updateIdentityCard);
+                            if (validateIdentityCard == null)
+                            {
+                                while (exitIdentityCard == 0)
+                                {
+                                    Console.WriteLine("Do you want to update Identity Card? (Y/n)");
+                                    string choiceyn = Console.ReadLine();
+                                    choiceyn = choiceyn.ToLower();
+                                    switch (choiceyn)
+                                    {
+                                        case "y":
+                                            user.UserId = updateIdentityCard;
+                                            controller.HandleEditInfoUser("userId", updateIdentityCard);
+                                            exitIdentityCard = 1;
+                                            break;
+                                        case "n":
+                                            exitIdentityCard = 1;
+                                            break;
+                                        default:
+                                            Console.WriteLine("Only input Y or N");
+                                            break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(validateIdentityCard);
+                            }
+                        }
+                        break;
+                    case 5:
+                        exit = 1;
+                        break;
+                    default:
+                        Console.WriteLine("Your choice invalid. Please enter 1- 5.");
+                        break;
+                }
+            }
+
+        }
         // Tạo form truy vấn số dư.
         public void QueryBalance()
         {
