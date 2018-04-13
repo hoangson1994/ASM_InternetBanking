@@ -231,8 +231,33 @@ namespace InternetBanking
         }
 
         // update số dư tài khoản của người nhận và người chuyển khi thực hiện chuyển khoản.
-        public bool Update(Account account)
+        public bool Update(string userNameEdit, string colum, string userEdit)
         {
+            DbConnection dbConnection = new DbConnection();
+            string query = "UPDATE user SET " + colum + "='" + userEdit + "' WHERE username= '" + userNameEdit + "'";
+
+            //open connection
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, dbConnection.Connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+
+                    //close connection
+                    dbConnection.CloseConnection();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                
+            }
+
             return false;
         }
 

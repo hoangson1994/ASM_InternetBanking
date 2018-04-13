@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -87,15 +88,15 @@ namespace InternetBanking
 
         public string ValidateBirthday(string txt)
         {
-            Regex regex = new Regex(@"^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$");
+            Regex regex = new Regex(@"^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$");
             Regex regex2 = new Regex("[\\s]");
             if (regex2.IsMatch(txt))
             {
-              return MapEntity.mapError["birthday"].ErrorEmpty;
+                return MapEntity.mapError["birthday"].ErrorEmpty;
             }
             else if (regex.IsMatch(txt))
             {
-                DateTime birthdayDateTime = DateTime.Parse(txt);
+                DateTime birthdayDateTime = DateTime.ParseExact(txt, "dd/mm/yyyy", CultureInfo.InvariantCulture);
                 if ((DateTime.Now.Year - birthdayDateTime.Year) < 18)
                 {
                     return MapEntity.mapError["birthday"].ErrorLength;
@@ -103,11 +104,11 @@ namespace InternetBanking
                 else
                 {
                     return null;
-                } 
+                }
             }
             else
             {
-              return MapEntity.mapError["birthday"].ErrorCharacter;
+                return MapEntity.mapError["birthday"].ErrorCharacter;
             }
         }
 

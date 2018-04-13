@@ -73,16 +73,25 @@ namespace InternetBanking
         }
 
         // viết các câu lệnh xử lí phần thông tin người dùng
-        public void HandleInforUser()
+        public void HandleShowInforUser()
         {
-            Console.WriteLine("Full Name: " + user.Fullname);
-            Console.WriteLine("Bank Id: " + user.BankId);
-            Console.WriteLine("Birthday :" + user.Birthday);
-            Console.WriteLine("Gender: " + (user.Gender == 0 ? "Female" : (user.Gender == 1 ? "Male" : "Other")));
-            Console.WriteLine("Phone: " + user.Phone);
-            Console.WriteLine("Email: " + user.Email);
+            Console.WriteLine("Full Name" + "\t|\t" + "Bank Id" + "\t|\t" + "Birthday" + "\t|\t" + "Gender" + "\t|\t" + "Phone" + "\t\t\t|\t\t" + "Email");
+            Console.WriteLine("==========================================================================================================================================\n");
+            Console.WriteLine(user.Fullname 
+                                  + "\t|\t" + user.BankId 
+                                  + "\t|\t" + user.Birthday 
+                                  + "\t|\t" + (user.Gender == 0 ? "Female" : (user.Gender == 1 ? "Male" : "Other")) 
+                                  + "\t|\t" + user.Phone 
+                                  + "\t\t|\t\t" + user.Email);
+            Console.WriteLine("\n==========================================================================================================================================");
         }
 
+        public void HandleEditInfoUser( string colum, string userEdit)
+        {
+
+            model.Update(user.Username, colum, userEdit);
+            user = model.SelectByUsernameFromTableUser(user.Username);
+        }
         // viết các câu lệnh xử lí phần truy vấn số dư
         public void HandleQueryBalance()
         {
@@ -133,10 +142,7 @@ namespace InternetBanking
                         + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
                 }
                 Console.WriteLine("========================================================================================================");
-
-
-            
-
         }
+
     }
 }
