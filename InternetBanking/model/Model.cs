@@ -39,7 +39,7 @@ namespace InternetBanking
                         int status = dataReader.GetInt32("status");
                         long createAt = dataReader.GetInt64("createAt");
                         long updateAt = dataReader.GetInt64("updateAt");
-                        user = new User(usernameDb,bankId, balance, fullName, birthday, phone, gender, userId, email, status, createAt, updateAt);
+                        user = new User(usernameDb, bankId, balance, fullName, birthday, phone, gender, userId, email, status, createAt, updateAt);
                     }
                     //close Data Reader
                     dataReader.Close();
@@ -98,7 +98,7 @@ namespace InternetBanking
         // lấy ra thông tin user theo tài khoản ngân hàng 
         public void SelectByBankId()
         {
-            
+
         }
 
         public List<History> SelectBankIdByHistory(string bankId)
@@ -109,7 +109,7 @@ namespace InternetBanking
             string query = "SELECT * FROM history WHERE sendBankId=?val1 OR receiveBankId=?val2 ";
 
             //Create a list to store the result
-           
+
 
             //Open connection
             if (dbConnection.OpenConnection() == true)
@@ -154,20 +154,20 @@ namespace InternetBanking
 
                     Console.WriteLine(e.Message);
                 }
-                
+
             }
-            
-            
-                return listHistory;
-            
+
+
+            return listHistory;
+
         }
 
         // thêm vào bảng users khi đăng kí thành công
         public bool InsertToTableUsers(User user)
         {
             DbConnection dbConnection = new DbConnection();
-            string query = "INSERT INTO user (username, bankId, balance, fullname, birthday, phone, gender, userId, email, status, createAt) VALUES('"+ user.Username +"','"+ user.BankId +"', "+ user.Balance+", " +
-                           "'"+ user.Fullname+"', '"+user.Birthday+"', '"+user.Phone+"',"+user.Gender+",'"+user.UserId+"','"+user.Email+"',"+user.Status+","+user.CreateAt+")";
+            string query = "INSERT INTO user (username, bankId, balance, fullname, birthday, phone, gender, userId, email, status, createAt) VALUES('" + user.Username + "','" + user.BankId + "', " + user.Balance + ", " +
+                           "'" + user.Fullname + "', '" + user.Birthday + "', '" + user.Phone + "'," + user.Gender + ",'" + user.UserId + "','" + user.Email + "'," + user.Status + "," + user.CreateAt + ")";
 
             //open connection
             if (dbConnection.OpenConnection() == true)
@@ -188,7 +188,7 @@ namespace InternetBanking
                 {
                     Console.WriteLine(e);
                 }
-                
+
             }
 
             return false;
@@ -198,7 +198,7 @@ namespace InternetBanking
         public bool InsertToTableAccount(Account account)
         {
             DbConnection dbConnection = new DbConnection();
-            string query = "INSERT INTO account (username, password, salt) VALUES('"+account.Username+"','"+account.Password+"','"+account.Salt+"')";
+            string query = "INSERT INTO account (username, password, salt) VALUES('" + account.Username + "','" + account.Password + "','" + account.Salt + "')";
 
             //open connection
             if (dbConnection.OpenConnection() == true)
@@ -292,7 +292,7 @@ namespace InternetBanking
         // transaction mysql
         public void Transactions()
         {
-    
+
         }
     }
 }

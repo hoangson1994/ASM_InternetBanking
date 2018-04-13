@@ -205,7 +205,7 @@ namespace InternetBanking
 
             user.BankId = BankIdGenerator.BankIdGen(6);
             user.CreateAt = longTime.CurrentTimeMillis();
-            controller.HandleSignup(account,user);
+            controller.HandleSignup(account, user);
         }
 
         // Tạo form Menu chính.
@@ -289,7 +289,7 @@ namespace InternetBanking
 
         // Tạo form chuyển khoản.
         public void Transfer()
-        {        
+        {
 
         }
 
