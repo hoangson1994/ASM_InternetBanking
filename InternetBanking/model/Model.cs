@@ -1,9 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace InternetBanking
 {
@@ -101,7 +98,7 @@ namespace InternetBanking
             DbConnection dbConnection = new DbConnection();
             // viết các câu lệnh get user theo username;
            User user = null;
-            string query = "SELECT * FROM user where bandId ='" + bankId + "'";
+            string query = "SELECT * FROM user where bankId ='" + bankId + "'";
             //Open connection
             if (dbConnection.OpenConnection() == true)
             {
@@ -173,11 +170,11 @@ namespace InternetBanking
                         string getTradingCode = dataReader.GetString("tradingCode");
                         string getSendBankId = dataReader.GetString("sendBankId");
                         string getReceiveBankId = dataReader.GetString("receiveBankId");
-                        double getBalance = dataReader.GetDouble("amount");
+                        double getamount = dataReader.GetDouble("amount");
                         string getContent = dataReader.GetString("content");
 
-                        long getCreateAt = dataReader.GetInt32("dateTransaction");
-                        History history = new History(getTradingCode, getSendBankId, getReceiveBankId, getBalance, getContent, getCreateAt);
+                        long getdateTransaction = dataReader.GetInt64("dateTransaction");
+                        History history = new History(getTradingCode, getSendBankId, getReceiveBankId, getamount, getContent, getdateTransaction);
                         listHistory.Add(history);
                     }
 
@@ -266,21 +263,89 @@ namespace InternetBanking
                                                                                                  
 
         // thêm vào bảng history khi chuyển khoản thành công
-            public void InsertToTableHistory()
+        public bool InsertToTableHistory(History history)
         {
+
+            DbConnection dbConnection = new DbConnection();
+            string query = "INSERT INTO history (tradingCode, sendBankId, receiveBankId, amount, content, dateTransaction) VALUES('"+ history.TradingCode + "','" + history.SendBankId + "', '" + history.ReceiveBankId + "', " + history.Amount + ", '" + history.Content + "', " + history.DateTransaction + ")";
+
+            //open connection
+
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, dbConnection.Connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+
+                    //close connection
+                    dbConnection.CloseConnection();
+
+                    return true;
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+                              
+            }
+            return false;
+        }
+
       
-
-        }
-
-        // update số dư tài khoản của người nhận và người chuyển khi thực hiện chuyển khoản.
-        public void Update()
-        {
-
-        }
-
         // transaction mysql
-        public void Transactions()
+        public bool Transactions(string bankIdSource, string bankIdBeneficiaries, double balanceSource, double balanceBeneficiaries)
         {
+            DbConnection dbConnection = new DbConnection();
+            MySqlTransaction tr = null;
+
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+
+                    tr = dbConnection.Connection.BeginTransaction();
+
+                    string UpdateSourceUser = "UPDATE user SET balance = '" + balanceSource + "' WHERE bankId = '" + bankIdSource + "'";
+                    MySqlCommand cmd1 = new MySqlCommand();
+                    cmd1.Connection = dbConnection.Connection;
+                    cmd1.Transaction = tr;
+                    cmd1.CommandText = UpdateSourceUser;
+
+                    string UpdateUserBeneficiaries = "UPDATE user SET balance = '" + balanceBeneficiaries + "' WHERE bankId = '" + bankIdBeneficiaries + "'";
+                    MySqlCommand cmd2 = new MySqlCommand();
+                    cmd2.Connection = dbConnection.Connection;
+                    cmd2.Transaction = tr;
+                    cmd2.CommandText = UpdateUserBeneficiaries;
+
+
+                    cmd1.ExecuteNonQuery();
+                    cmd2.ExecuteNonQuery();
+                    tr.Commit();
+
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    try
+                    {
+                        tr.Rollback();
+                    }
+                    catch (MySqlException ex1)
+                    {
+                        Console.WriteLine("ko rollback dc");
+                        Console.WriteLine(ex1.Message);
+                    }
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return false;
            
         }
     }
