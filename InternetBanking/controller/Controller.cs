@@ -32,19 +32,11 @@ namespace InternetBanking
                     return true;
 
                 }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
+                
             }
 
-            // nếu hàm trả về 1 user: 
-            //  - so sánh password nhập vào và pass lưu trong database: == thì return true còn != return false (có muối);
-            // nếu hàm trả về null thì return false(đăng nhập không thành công); 
+            return false;         
+            
         }
 
 
@@ -52,21 +44,17 @@ namespace InternetBanking
         public bool HandleSignup(Account account, User user)
         {
             if (model.InsertToTableAccount(account) == true && model.InsertToTableUsers(user) == true)
-            {
-                Console.WriteLine("Sign Up Success");
+            {                
                 return true;
             }
-            else
-            {
-                Console.WriteLine("Sign Up Failed.");
-                return false;
-            }
-
+                   
+            return false;
         }
 
         // viết các câu lệnh xử lí phần thông tin người dùng
         public void HandleShowInforUser()
         {
+            Console.WriteLine("==========================================================================================================================================");
             Console.WriteLine("Full Name" + "\t|\t" + "Bank Id" + "\t|\t" + "Birthday" + "\t|\t" + "Gender" + "\t|\t" + "Phone" + "\t\t\t|\t\t" + "Email");
             Console.WriteLine("==========================================================================================================================================\n");
             Console.WriteLine(userLogin.Fullname
@@ -81,7 +69,40 @@ namespace InternetBanking
         // viết các câu lệnh xử lí phần truy vấn số dư
         public void HandleQueryBalance()
         {
+            Console.WriteLine("1. Bank Number: " + userLogin.BankId);
+            Console.WriteLine("2. Fullname: " + userLogin.Fullname);
+            Console.WriteLine("3. Balance: " + userLogin.Balance.ToString("N1", CultureInfo.InvariantCulture));
+            Console.WriteLine("4. Last 5 transactions:");
 
+            List<History> history = model.SelectBankIdByHistory(userLogin.BankId);
+
+            string change;
+
+            Console.WriteLine("Status" + "\t |" + "TradingCode" + "\t |" + "Change" + "\t |" + "Amount (VND)" + "\t\t |" + "Content" + "\t |" + "Date Transaction");
+            Console.WriteLine("========================================================================================================");
+            for (int i = 0; i < 5; i++)
+            {
+                if (userLogin.BankId == history[i].SendBankId)
+                {
+
+                    history[i].Status = "Send";
+                    change = "-";
+
+
+                }
+                else
+                {
+                    history[i].Status = "Receive";
+                    change = "+";
+                }
+                Console.WriteLine(history[i].Status
+                    + "\t |" + history[i].TradingCode
+                    + "\t\t |  " + change
+                    + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
+                    + "\t\t |" + history[i].Content
+                    + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
+            }
+            Console.WriteLine("========================================================================================================");
         }
 
         // viết các câu lệnh xử lí phần rút tiền
@@ -139,9 +160,6 @@ namespace InternetBanking
             }
             Console.WriteLine("========================================================================================================");
 
-
-
-
         }
 
 
@@ -169,13 +187,20 @@ namespace InternetBanking
             return false;
         }
 
-        public bool CheckAmountMoney(double amount)
+        public int  CheckAmountMoney(double amount)
         {
-            if(userLogin.Balance >= amount)
+            if(amount < 1000)
             {
-                return true;
+                return 0;
             }
-            return false;
+            else if(amount >= 1000 && amount <= userLogin.Balance)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
         }
 
         public void PrintInfoUserBeneficiaries()
