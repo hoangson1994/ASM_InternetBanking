@@ -20,7 +20,7 @@ namespace InternetBanking
         {
             while (true)
             {
-                Console.WriteLine("========Wellcom to InternetBanking========");
+                Console.WriteLine("================= Wellcom to InternetBanking ====================");
                 Console.WriteLine("1. Login.");
                 Console.WriteLine("2. Signup.");
                 Console.WriteLine("3. Exit.");
@@ -33,7 +33,7 @@ namespace InternetBanking
                         choice = int.Parse(Console.ReadLine());
                         break;
                     }
-                    catch (FormatException e)
+                    catch (FormatException)
                     {
                         Console.WriteLine("Your choice invalid. Please input only number.");
                     }
@@ -54,12 +54,14 @@ namespace InternetBanking
                         Console.WriteLine("Please enter from 1 to 3 !!!");
                         break;
                 }
+                Console.WriteLine("==================================================================");
             }
         }
 
         // Tạo form Login.
         public void Login()
         {
+            Console.WriteLine("===================== LOGIN ======================");
             // cho người dùng nhập username.
             Console.WriteLine("Please enter your username: ");
             String username = Console.ReadLine();
@@ -82,8 +84,7 @@ namespace InternetBanking
                 Console.WriteLine("Login error. Please check again username or password. !!!");
             }
 
-            // nếu hàm trả về true .....(các xử lí tiếp theo, như gọi đến hàm Menu());
-            // nếu hàm trả về false - thông báo đăng nhập khoog thành công ;
+            Console.WriteLine("==================================================");
 
         }
 
@@ -91,7 +92,7 @@ namespace InternetBanking
         // Tạo form Signup .
         public void Signup()
         {
-            Console.WriteLine("========= Sign Up Form ========");
+            Console.WriteLine("====================== SIGN UP =======================");
             Account account = new Account();
             User user = new User();
             while (true)
@@ -250,7 +251,16 @@ namespace InternetBanking
 
             user.BankId = StringGenerator.NumberGen(6);
             user.CreateAt = longTime.CurrentTimeMillis();
-            controller.HandleSignup(account,user);
+            if (controller.HandleSignup(account, user))
+            {
+                Console.WriteLine("Sign Up Success");
+            }
+            else
+            {
+                Console.WriteLine("Sign Up Failed.");
+            }
+
+            Console.WriteLine("=========================================================");
         }
 
         // Tạo form Menu chính.
@@ -259,9 +269,9 @@ namespace InternetBanking
             int exit = 0;
             while (exit == 0)
             {
-                Console.WriteLine("========Generate Menu========");
+                Console.WriteLine("======================= MENU ========================");
                 //1. thông tin  người dùng
-                Console.WriteLine("1. Info");
+                Console.WriteLine("1. User Information");
                 //2. truy vấn số dư
                 Console.WriteLine("2. Balance Query");
                 //3. rút tiền
@@ -281,7 +291,7 @@ namespace InternetBanking
                         choiceMenu = int.Parse(Console.ReadLine());
                         break;
                     }
-                    catch (FormatException e)
+                    catch (FormatException)
                     {
                         Console.WriteLine("Your choice invalid. Please input only number.");
                     }
@@ -310,6 +320,7 @@ namespace InternetBanking
                         Console.WriteLine("Please enter to 1 from 5.");
                         break;
                 }
+                Console.WriteLine("====================================================");
             }
         }
 
@@ -319,19 +330,20 @@ namespace InternetBanking
             int exit = 0;
             while (exit == 0)
             {
-                Console.WriteLine("====== Menu Info User =======");
+                Console.WriteLine("------------------ User Information  -------------------");
                 Console.WriteLine("1. Show User Information.");
                 Console.WriteLine("2. Edit Information.");
                 Console.WriteLine("3. Back to Menu.");
                 int choice = 0;
-                while (choice == 0 || choice > 3)
+                while (true)
                 {
                     Console.WriteLine("Please enter your choice: ");
                     try
                     {
                         choice = int.Parse(Console.ReadLine());
+                        break;
                     }
-                    catch (FormatException e)
+                    catch (FormatException)
                     {
                         Console.WriteLine("Your choice invalid. Please input only number.");
                     }
@@ -340,7 +352,9 @@ namespace InternetBanking
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("************* Show Info User ***************");
                         controller.HandleShowInforUser();
+                        Console.WriteLine("**************************** ***************");
                         break;
                     case 2:
                         UpdateUser();
@@ -352,17 +366,18 @@ namespace InternetBanking
                         Console.WriteLine("Your choice invalid. Please re-enter your choice.");
                         break;
                 }
-            }
-
-
+                Console.WriteLine("-----------------------------------------------------------");
+            }            
         }
+
+        // form update info
         public void UpdateUser()
         {
             User user = new User();
             int exit = 0;
             while (exit == 0)
             {
-                Console.WriteLine("====== Update Info User =======");
+                Console.WriteLine("************** Update Info User **************");
                 Console.WriteLine("1. Edit Phone Number.");
                 Console.WriteLine("2. Edit Email.");
                 Console.WriteLine("3. Edit Birthday.");
@@ -377,7 +392,7 @@ namespace InternetBanking
                         choice = int.Parse(Console.ReadLine());
                         break;
                     }
-                    catch (FormatException e)
+                    catch (FormatException)
                     {
                         Console.WriteLine("Your choice invalid. Please input only number.");
                     }
@@ -538,13 +553,16 @@ namespace InternetBanking
                         Console.WriteLine("Your choice invalid. Please enter 1- 5.");
                         break;
                 }
-            }
-
+                Console.WriteLine("****************************************************");
+            }           
         }
+
         // Tạo form truy vấn số dư.
         public void QueryBalance()
         {
-
+            Console.WriteLine("--------------- Balance Query ---------------");
+            controller.HandleQueryBalance();
+            Console.WriteLine("---------------------------------------------");
         }
 
         // Tạo form rút tiền.
@@ -559,8 +577,8 @@ namespace InternetBanking
            int exit = 0;
             while(exit == 0)
             {
-                Console.WriteLine("------------- TRANNSFER --------------");
-                double amount = 0;
+                Console.WriteLine("---------------- TRANNSFER -----------------");
+                
                 while (true)
                 {
                     Console.WriteLine("1. Please enter BankID Beneficiaries: ");
@@ -573,25 +591,48 @@ namespace InternetBanking
                     Console.WriteLine("BankId does not exist. Please check again BankId.");
                 }
 
+                double amount = 0;
                 int exit1 = 0;
                 while (exit1 == 0)
                 {
-                    Console.WriteLine("2. Please enter amount money transfer: ");
-                    amount = double.Parse(Console.ReadLine());
-                    if (controller.CheckAmountMoney(amount))
+                    int checkAmountMoney;
+                    while (true)
+                    {
+                        Console.WriteLine("2. Please enter amount money transfer: ");
+                        try
+                        {
+                            amount = double.Parse(Console.ReadLine());
+                            checkAmountMoney = controller.CheckAmountMoney(amount);
+                            if(checkAmountMoney == 0)
+                            {
+                                Console.WriteLine("The minimum transfer amount is 1000 VNĐ. Please enter again.");
+                                continue;
+                            }
+                            break;
+                        }
+                        catch (Exception)
+                        {
+
+                            Console.WriteLine("Only enter number. Please enter again.");
+                        }
+                       
+                    }
+
+                    
+                    if (checkAmountMoney == 1)
                     {                        
                         break;
                     }
-
-                    amount = 0;
-                    Console.WriteLine("Balance not enough. Would you like to continue transfer(Y/N)?");
-                    char choice = char.ToLower(char.Parse(Console.ReadLine()));
-
+                   
+                    Console.WriteLine("Your balance not enough. Would you like to continue transfer(Y/N)?");
+                    string choice = Console.ReadLine();
+                    choice = choice.ToLower();
                     switch (choice)
                     {
-                        case 'y':                            
+                        case "y":                            
                             break;
-                        case 'n':
+                        case "n":
+                            amount = 0;
                             exit1 = 1; 
                             break;
                         default:
@@ -615,11 +656,11 @@ namespace InternetBanking
                 while (exit2 == 0)
                 {
                     Console.WriteLine("---- Are you want perform transaction(Y/N): ");
-                    char choice = char.ToLower(char.Parse(Console.ReadLine()));
-
+                    string choice = Console.ReadLine();
+                    choice = choice.ToLower();
                     switch (choice)
                     {
-                        case 'y':                           
+                        case "y":                           
                             if(controller.HandleTransfers(amount, content))
                             {
                                 Console.WriteLine("Transfer Success!");
@@ -630,7 +671,7 @@ namespace InternetBanking
                             }
                             exit2 = 1;
                             break;
-                        case 'n':
+                        case "n":
                             exit2 = 1;
                             break;
                         default:
@@ -642,15 +683,15 @@ namespace InternetBanking
                 int exit3 = 0;
                 while (exit3 == 0)
                 {
-                    Console.WriteLine("Are you want perform transfer other(Y/N):");
-                    char choice2 = char.ToLower(char.Parse(Console.ReadLine()));
-
-                    switch (choice2)
+                    Console.WriteLine("----- Are you want perform transfer other(Y/N):");
+                    string choice = Console.ReadLine();
+                    choice = choice.ToLower();
+                    switch (choice)
                     {
-                        case 'y':
+                        case "y":
                             exit3 = 1;
                             break;
-                        case 'n':
+                        case "n":
                             exit = 1;
                             exit3 = 1;
                             break;
@@ -660,7 +701,7 @@ namespace InternetBanking
                     }
                 }
 
-                Console.WriteLine("--------------------------------");
+                Console.WriteLine("----------------------------------------------");
             }
             
         }
@@ -668,7 +709,9 @@ namespace InternetBanking
         // Tạo form tra cứu lịch sử giao dịch
         public void TransactionHistory()
         {
+            Console.WriteLine("-------------- Transaction History ---------------");
             controller.HandleTransactionHistory();
+            Console.WriteLine("--------------------------------------------------");            
         }
     }
 }
