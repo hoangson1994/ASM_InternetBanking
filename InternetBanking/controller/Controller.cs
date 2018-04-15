@@ -30,15 +30,11 @@ namespace InternetBanking
                 {
                     userLogin = model.SelectByUsernameFromTableUser(username);
                     return true;
-
-                }
-                
+                }                
             }
 
-            return false;         
-            
+            return false;                     
         }
-
 
         // viết các câu lệnh xử lí phần đăng kí
         public bool HandleSignup(Account account, User user)
@@ -106,9 +102,17 @@ namespace InternetBanking
         }
 
         // viết các câu lệnh xử lí phần rút tiền
-        public void HandleWithdrawal()
+        public bool HandleWithdrawal(double amount)
         {
-
+            double balanceNew = userLogin.Balance - amount;
+            if(model.UpdateBalanceWithdraw(balanceNew, userLogin.BankId))
+            {
+                History history = new History(StringGenerator.NumberGen(3), userLogin.BankId,"", amount, "Withdraw");
+                model.InsertToTableHistory(history);
+                userLogin = model.SelectByUsernameFromTableUser(userLogin.Username);
+                return true;
+            }           
+            return false;
         }
 
         // viết các câu lệnh xử lí phần chuyển khoản
@@ -120,7 +124,7 @@ namespace InternetBanking
             if (model.Transactions(userLogin.BankId, userBeneficiaries.BankId, balanceSource, balanceBeneficiaries)) {
                 
                 History history = new History(StringGenerator.NumberGen(3), userLogin.BankId, userBeneficiaries.BankId, amount, content);
-                model.InsertToTableHistory(history);
+                model.InsertToTableHistory(history);                               
                 return true;
             }
 
@@ -131,6 +135,7 @@ namespace InternetBanking
         public void HandleTransactionHistory()
         {
             List<History> history = model.SelectBankIdByHistory(userLogin.BankId);
+            
 
             string change;
 
@@ -217,11 +222,17 @@ namespace InternetBanking
             Console.WriteLine("{0,-10} {1,25} {2,25} {3,25} {4,25} {5,25}", "Source BankId ", "Beneficiaries BankId", "Beneficiary Name", "Money Amount", "Transaction Date", "Content");
             Console.WriteLine("{0,-10} {1,29} {2,25} {3,25} {4,25} {5,25}", userLogin.BankId, userBeneficiaries.BankId, userBeneficiaries.Fullname, amount.ToString("N1", CultureInfo.InvariantCulture), DateTime.Now.ToString(), content);
         }
-        public void HandleEditInfoUser(string colum, string userEdit)
+
+        public bool HandleEditInfoUser(string colum, string userEdit)
         {
 
-            model.Update(userLogin.Username, colum, userEdit);
-            userLogin = model.SelectByUsernameFromTableUser(userLogin.Username);
+            if(model.Update(userLogin.Username, colum, userEdit))
+            {
+                userLogin = model.SelectByUsernameFromTableUser(userLogin.Username);
+                return true;
+            }
+            return false;
         }
+       
     }
 }
