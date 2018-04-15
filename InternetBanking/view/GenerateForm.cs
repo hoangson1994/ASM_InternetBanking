@@ -217,9 +217,10 @@ namespace InternetBanking
 
             while (true)
             {
-                Console.WriteLine("Please Enter Gender: ");
+                Console.WriteLine("Please Enter Gender (F(female)/M(male)/O(other)): ");
                 string inputGender = Console.ReadLine();
                 inputGender = inputGender.ToLower();
+                Console.WriteLine("==="+ inputGender);
                 string validateGender = validate.ValidateGender(inputGender);
                 int gender = 0;
                 if (validateGender == null)
@@ -251,13 +252,17 @@ namespace InternetBanking
 
             user.BankId = StringGenerator.NumberGen(6);
             user.CreateAt = longTime.CurrentTimeMillis();
+            user.Balance = 5000000;
+
+            Console.WriteLine("Processing ......");
+
             if (controller.HandleSignup(account, user))
             {
                 Console.WriteLine("Sign Up Success");
             }
             else
             {
-                Console.WriteLine("Sign Up Failed.");
+                Console.WriteLine("Sign Up Failed. Please try again.");
             }
 
             Console.WriteLine("=========================================================");
@@ -727,8 +732,9 @@ namespace InternetBanking
                     choice = choice.ToLower();
                     switch (choice)
                     {
-                        case "y":                           
-                            if(controller.HandleTransfers(amount, content))
+                        case "y":
+                            Console.WriteLine("Transaction processing .....");
+                            if (controller.HandleTransfers(amount, content))
                             {
                                 Console.WriteLine("Transfer Success!");
                             }
@@ -755,7 +761,7 @@ namespace InternetBanking
                     choice = choice.ToLower();
                     switch (choice)
                     {
-                        case "y":
+                        case "y":                           
                             exit3 = 1;
                             break;
                         case "n":

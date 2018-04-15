@@ -59,7 +59,7 @@ namespace InternetBanking
                               + "\t|\t" + (userLogin.Gender == 0 ? "Female" : (userLogin.Gender == 1 ? "Male" : "Other"))
                               + "\t|\t" + userLogin.Phone
                               + "\t\t|\t\t" + userLogin.Email);
-            Console.WriteLine("\n==========================================================================================================================================");
+            Console.WriteLine("==========================================================================================================================================");
         }
 
         // viết các câu lệnh xử lí phần truy vấn số dư
@@ -67,37 +67,46 @@ namespace InternetBanking
         {
             Console.WriteLine("1. Bank Number: " + userLogin.BankId);
             Console.WriteLine("2. Fullname: " + userLogin.Fullname);
-            Console.WriteLine("3. Balance: " + userLogin.Balance.ToString("N1", CultureInfo.InvariantCulture));
+            Console.WriteLine("3. Balance: " + userLogin.Balance.ToString("N1", CultureInfo.InvariantCulture) + " VND");
             Console.WriteLine("4. Last 5 transactions:");
 
-            List<History> history = model.SelectBankIdByHistory(userLogin.BankId);
-
-            string change;
-
+            List<History> history = model.SelectByBankIdFromHistory(userLogin.BankId);
+                        
+            Console.WriteLine("========================================================================================================");
             Console.WriteLine("Status" + "\t |" + "TradingCode" + "\t |" + "Change" + "\t |" + "Amount (VND)" + "\t\t |" + "Content" + "\t |" + "Date Transaction");
             Console.WriteLine("========================================================================================================");
-            for (int i = 0; i < 5; i++)
+            if (history.Count != 0)
             {
-                if (userLogin.BankId == history[i].SendBankId)
+                SortedHistoryTransaction(history);
+                string change;
+                for (int i = 0; i < Math.Min(history.Count, 5); i++)
                 {
+                    if (userLogin.BankId == history[i].SendBankId)
+                    {
 
-                    history[i].Status = "Send";
-                    change = "-";
+                        history[i].Status = "Send";
+                        change = "-";
 
 
+                    }
+                    else
+                    {
+                        history[i].Status = "Receive";
+                        change = "+";
+                    }
+                    Console.WriteLine(history[i].Status
+                        + "\t |" + history[i].TradingCode
+                        + "\t\t |  " + change
+                        + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
+                        + "\t\t |" + history[i].Content
+                        + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
                 }
-                else
-                {
-                    history[i].Status = "Receive";
-                    change = "+";
-                }
-                Console.WriteLine(history[i].Status
-                    + "\t |" + history[i].TradingCode
-                    + "\t\t |  " + change
-                    + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
-                    + "\t\t |" + history[i].Content
-                    + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
             }
+            else
+            {
+                Console.WriteLine("\t\t\t\t\t\tNot Transaction");
+            }
+           
             Console.WriteLine("========================================================================================================");
         }
 
@@ -124,7 +133,8 @@ namespace InternetBanking
             if (model.Transactions(userLogin.BankId, userBeneficiaries.BankId, balanceSource, balanceBeneficiaries)) {
                 
                 History history = new History(StringGenerator.NumberGen(3), userLogin.BankId, userBeneficiaries.BankId, amount, content);
-                model.InsertToTableHistory(history);                               
+                model.InsertToTableHistory(history);    
+                userLogin = model.SelectByUsernameFromTableUser(userLogin.Username);
                 return true;
             }
 
@@ -134,34 +144,41 @@ namespace InternetBanking
         // viết các câu lệnh xử lí phần xem lịch sử giao dịch
         public void HandleTransactionHistory()
         {
-            List<History> history = model.SelectBankIdByHistory(userLogin.BankId);
-            
+            List<History> history = model.SelectByBankIdFromHistory(userLogin.BankId);
 
-            string change;
-
+            Console.WriteLine("========================================================================================================");
             Console.WriteLine("Status" + "\t |" + "TradingCode" + "\t |" + "Change" + "\t |" + "Amount (VND)" + "\t\t |" + "Content" + "\t |" + "Date Transaction");
             Console.WriteLine("========================================================================================================");
-            for (int i = 0; i < history.Count; i++)
+            if (history.Count != 0)
             {
-                if (userLogin.BankId == history[i].SendBankId)
+                SortedHistoryTransaction(history);
+                string change;
+                for (int i = 0; i < history.Count; i++)
                 {
+                    if (userLogin.BankId == history[i].SendBankId)
+                    {
 
-                    history[i].Status = "Send";
-                    change = "-";
+                        history[i].Status = "Send";
+                        change = "-";
 
 
+                    }
+                    else
+                    {
+                        history[i].Status = "Receive";
+                        change = "+";
+                    }
+                    Console.WriteLine(history[i].Status
+                        + "\t |" + history[i].TradingCode
+                        + "\t\t |  " + change
+                        + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
+                        + "\t\t |" + history[i].Content
+                        + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
                 }
-                else
-                {
-                    history[i].Status = "Receive";
-                    change = "+";
-                }
-                Console.WriteLine(history[i].Status
-                    + "\t |" + history[i].TradingCode
-                    + "\t\t |  " + change
-                    + "\t\t |" + string.Format("{0:0,0 vnđ}", history[i].Amount)
-                    + "\t\t |" + history[i].Content
-                    + "\t |" + longTime.ConvertCurrenTime(history[i].DateTransaction));
+            }
+            else
+            {
+                Console.WriteLine("\t\t\t\t\t\tNot Transaction");
             }
             Console.WriteLine("========================================================================================================");
 
@@ -210,17 +227,20 @@ namespace InternetBanking
 
         public void PrintInfoUserBeneficiaries()
         {
-            Console.WriteLine("===========INFO===========");
-            Console.WriteLine("{0,-20} {1,5}", "Fullname", "BankId");
-            Console.WriteLine("==========================");
-            Console.WriteLine("{0,-20} {1,5}", userBeneficiaries.Fullname, userBeneficiaries.BankId);
-            Console.WriteLine("==========================");
+            Console.WriteLine("*********** INFO ************");
+            Console.WriteLine("{0,-20} {1,5}", "Fullname", "|BankId");
+            Console.WriteLine("=============================");
+            Console.WriteLine("{0,-20} {1,5}", userBeneficiaries.Fullname, "|"+userBeneficiaries.BankId);
+            Console.WriteLine("=============================");
         }
 
         public void PrintConfirmTransaction(double amount, string content)
-        {           
-            Console.WriteLine("{0,-10} {1,25} {2,25} {3,25} {4,25} {5,25}", "Source BankId ", "Beneficiaries BankId", "Beneficiary Name", "Money Amount", "Transaction Date", "Content");
-            Console.WriteLine("{0,-10} {1,29} {2,25} {3,25} {4,25} {5,25}", userLogin.BankId, userBeneficiaries.BankId, userBeneficiaries.Fullname, amount.ToString("N1", CultureInfo.InvariantCulture), DateTime.Now.ToString(), content);
+        {
+            Console.WriteLine("====================================================================================================================================================");
+            Console.WriteLine("{0,15} {1,25} {2,25} {3,25} {4,25} {5,25}", "Source BankId|", "Beneficiaries BankId|", "Beneficiary Name|", "Money Amount|", "Transaction Date|", "Content|");
+            Console.WriteLine("====================================================================================================================================================");
+            Console.WriteLine("{0,15} {1,25} {2,25} {3,25} {4,25} {5,25}", userLogin.BankId + "|", userBeneficiaries.BankId + "|", userBeneficiaries.Fullname + "|", amount.ToString("N1", CultureInfo.InvariantCulture) + "|", DateTime.Now.ToString() + "|", content + "|");
+            Console.WriteLine("====================================================================================================================================================");
         }
 
         public bool HandleEditInfoUser(string colum, string userEdit)
@@ -232,6 +252,23 @@ namespace InternetBanking
                 return true;
             }
             return false;
+        }
+
+        public void SortedHistoryTransaction(List<History> history)
+        {
+            History tmp;
+            for (int i = 0; i < history.Count; i++)
+            {
+                for (int j = i + 1; j < history.Count; j++)
+                {
+                    if(history[j].DateTransaction > history[i].DateTransaction)
+                    {
+                        tmp = history[j];
+                        history[j] = history[i];
+                        history[i] = tmp;
+                    }
+                }
+            }
         }
        
     }
