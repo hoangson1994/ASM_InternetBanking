@@ -322,7 +322,6 @@ namespace InternetBanking
                     cmd2.Transaction = tr;
                     cmd2.CommandText = UpdateUserBeneficiaries;
 
-
                     cmd1.ExecuteNonQuery();
                     cmd2.ExecuteNonQuery();
                     tr.Commit();
@@ -366,9 +365,34 @@ namespace InternetBanking
 
                     //close connection
                     dbConnection.CloseConnection();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+            }
+
+            return false;
+        }
+
+        public bool UpdateBalanceWithdraw(double balance, string bankId)
+        {
+            DbConnection dbConnection = new DbConnection();
+            string query = "UPDATE user SET balance =" + balance + " WHERE bankId ='" + bankId + "'";
+            if (dbConnection.OpenConnection() == true)
+            {
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, dbConnection.Connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
 
                     //close connection
-                    dbConnection.CloseConnection();
+                    dbConnection.CloseConnection();               
 
                     return true;
                 }

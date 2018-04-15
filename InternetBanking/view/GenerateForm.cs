@@ -354,7 +354,7 @@ namespace InternetBanking
                     case 1:
                         Console.WriteLine("************* Show Info User ***************");
                         controller.HandleShowInforUser();
-                        Console.WriteLine("**************************** ***************");
+                        Console.WriteLine("********************************************");
                         break;
                     case 2:
                         UpdateUser();
@@ -568,9 +568,76 @@ namespace InternetBanking
         // Tạo form rút tiền.
         public void Withdrawal()
         {
+            int exit = 0;
+            while (exit == 0)
+            {
+                Console.WriteLine("---------------------------------- Withdrawal -----------------------------");
+                Console.WriteLine("1. 100 000 VND");
+                Console.WriteLine("2. 200 000 VND");
+                Console.WriteLine("3. 500 000 VND");
+                Console.WriteLine("4. 1 000 000 VND");
+                Console.WriteLine("5. 2 000 000 VND");
+                Console.WriteLine("6. 5 000 000 VND");
+                Console.WriteLine("7. Another Choice");
+                Console.WriteLine("8. Back to Menu.");
 
+                Console.WriteLine("Please enter you choice: ");
+                int choice = 0;
+                while (true)
+                {
+                    try
+                    {
+                        choice = int.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch (Exception)
+                    {
+
+                        Console.WriteLine("Only enter number. Please enter again.");
+                    }
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        WithdrawDefault(100000);
+ 
+                        break;
+                    case 2:
+                        WithdrawDefault(200000);
+
+                        break;
+                    case 3:
+                        WithdrawDefault(500000);
+
+                        break;
+                    case 4:
+                        WithdrawDefault(1000000);
+
+                        break;
+                    case 5:
+                        WithdrawDefault(2000000);
+
+                        break;
+                    case 6:
+                        WithdrawDefault(5000000);
+
+                        break;
+                    case 7:
+                        WithdrawYourChoice();
+
+                        break;
+                    case 8:
+                        exit = 1;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter your choice from 1 to 8.");
+                        break;
+                }
+            }           
+            
         }
-
+        
         // Tạo form chuyển khoản.
         public void Transfer()
         {
@@ -713,5 +780,72 @@ namespace InternetBanking
             controller.HandleTransactionHistory();
             Console.WriteLine("--------------------------------------------------");            
         }
+
+        public void WithdrawDefault(double amount)
+        {
+            int checkMoney = controller.CheckAmountMoney(amount);
+            if (checkMoney == 1)
+            {
+                Console.WriteLine("Transaction processing ....");
+                if (controller.HandleWithdrawal(amount))
+                {
+                    Console.WriteLine("Withdraw Success !!!");
+                }
+                else
+                {
+                    Console.WriteLine("Withdraw Fail. Please try again later. !!!");
+                }     
+                               
+            }
+            else
+            {
+                Console.WriteLine("Your balance not enough. Please enter check again balance.");
+                
+            }
+            
+        }
+        public void WithdrawYourChoice()
+        {
+            double amount;
+            int checkAmount;
+            while (true)
+            {
+                Console.WriteLine("Please enter money amount you want withdraw:");
+                try
+                {
+                    amount = double.Parse(Console.ReadLine());
+                    checkAmount = controller.CheckAmountMoney(amount);
+                    if(checkAmount == 0)
+                    {
+                        Console.WriteLine("The minimum transfer amount is 1000 VNĐ. Please enter again.");
+                        continue;
+                    }
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Only enter number. Please enter again.");
+                }
+            }
+
+            if(checkAmount == 1)
+            {
+                Console.WriteLine("Transaction processing ....");
+                if (controller.HandleWithdrawal(amount))
+                {
+                    Console.WriteLine("Withdraw Success !!!");
+                }
+                else
+                {
+                    Console.WriteLine("Withdraw Fail !!!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Your balance not enough. Please check again.");
+            }
+            
+        }
+
     }
 }
