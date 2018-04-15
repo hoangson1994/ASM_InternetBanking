@@ -139,7 +139,7 @@ namespace InternetBanking
             return user;
         }
 
-        public List<History> SelectBankIdByHistory(string bankId)
+        public List<History> SelectByBankIdFromHistory(string bankId)
         {
             List<History> listHistory = new List<History>();
             // viết các câu lệnh get user theo username;
